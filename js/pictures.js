@@ -1,23 +1,17 @@
 // Файл pictures.js
 'use strict';
 
+var MIN_LIKES = 15;
+var MAX_LIKES = 200;
 var similarFotoTemplate = document.querySelector('#picture-template').content;
 var similarListElement = document.querySelector('.pictures');
 var galleryOverlay = document.querySelector('.gallery-overlay');
-galleryOverlay.classList.remove('hidden');
-document.querySelector('.upload-overlay').classList.add('hidden');
 var FOTO_COMENTS = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 
-printFoto(describeFotos(15, 200, FOTO_COMENTS, getUrl()));
-printFotoInGallery(describeFotos(15, 200, FOTO_COMENTS, getUrl())[0]);
-
-function getUrl() {
-  var urls = [];
-  for (var i = 1; i <= 25; i++) {
-    urls[i - 1] = 'photos/' + i + '.jpg';
-  }
-  return urls;
-}
+galleryOverlay.classList.remove('hidden');
+document.querySelector('.upload-overlay').classList.add('hidden');
+printFoto(describeFotos(MIN_LIKES, MAX_LIKES, FOTO_COMENTS));
+printFotoInGallery(describeFotos(MIN_LIKES, MAX_LIKES, FOTO_COMENTS)[0]);
 
 function getRandomMinMax(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -27,12 +21,12 @@ function getRandomNumber(number) {
   return Math.floor(Math.random() * (number - 1));
 }
 
-function describeFotos(minLikess, maxLikes, comment, address) {
+function describeFotos(minLikes, maxLikes, comment) {
   var pictures = [];
-  for (var j = 0; j < 25; j++) {
-    pictures[j] = {
-      url: address[j],
-      likes: getRandomMinMax(minLikess, maxLikes),
+  for (var i = 0; i < 25; i++) {
+    pictures[i] = {
+      url: 'photos/' + (i + 1) + '.jpg',
+      likes: getRandomMinMax(minLikes, maxLikes),
       comments: comment[getRandomNumber(comment.length)]
     };
   }
@@ -49,8 +43,8 @@ function getFotos(foto) {
 
 function printFoto(fotos) {
   var fragment = document.createDocumentFragment();
-  for (var a = 0; a < fotos.length; a++) {
-    fragment.appendChild(getFotos(fotos[a]));
+  for (var i = 0; i < fotos.length; i++) {
+    fragment.appendChild(getFotos(fotos[i]));
   }
   similarListElement.appendChild(fragment);
 }
