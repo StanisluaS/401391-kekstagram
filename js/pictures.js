@@ -8,10 +8,13 @@ var similarListElement = document.querySelector('.pictures');
 var galleryOverlay = document.querySelector('.gallery-overlay');
 var FOTO_COMENTS = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 
-galleryOverlay.classList.remove('hidden');
 document.querySelector('.upload-overlay').classList.add('hidden');
 printFoto(describeFotos(MIN_LIKES, MAX_LIKES, FOTO_COMENTS));
 printFotoInGallery(describeFotos(MIN_LIKES, MAX_LIKES, FOTO_COMENTS)[0]);
+
+similarListElement.addEventListener('click', function() {
+  galleryOverlay.classList.remove('hidden');
+});
 
 function getRandomMinMax(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
