@@ -6,7 +6,7 @@
   window.similarListElement = document.querySelector('.pictures');
   var similarFotoTemplate = document.querySelector('#picture-template').content;
 
-  printFoto(arrayFotos);
+  printFoto(window.arrayFotos);
 
   function getFotos(foto) {
     var fotoElement = similarFotoTemplate.cloneNode(true);
@@ -21,7 +21,7 @@
     for (var i = 0; i < fotos.length; i++) {
       fragment.appendChild(getFotos(fotos[i]));
     }
-    similarListElement.appendChild(fragment);
+    window.similarListElement.appendChild(fragment);
   }
 
 })();

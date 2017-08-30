@@ -7,7 +7,7 @@
   var ESC_KEYCODE = 27;
 
   var uploadOverlay = document.querySelector('.upload-overlay');
-  var galleryOverlayClose = galleryOverlay.querySelector('.gallery-overlay-close');
+  var galleryOverlayClose = window.galleryOverlay.querySelector('.gallery-overlay-close');
   var uploadSelectImage = document.querySelector('#upload-select-image');
   var uploadImage = uploadSelectImage.querySelector('.upload-image');
   var uploadFile = uploadSelectImage.querySelector('#upload-file');
@@ -19,8 +19,8 @@
   var uploadFormHashtags = uploadOverlay.querySelector('.upload-form-hashtags');
   var uploadFormDescription = uploadOverlay.querySelector('.upload-form-description');
 
-  similarListElement.addEventListener('click', openPopup);
-  similarListElement.addEventListener('keydown', onEnterPress);
+  window.similarListElement.addEventListener('click', openPopup);
+  window.similarListElement.addEventListener('keydown', onEnterPress);
   uploadFile.addEventListener('change', openOverlay);
 
   function openOverlay() {
@@ -33,10 +33,10 @@
     uploadEffect.addEventListener('click', setPhotoFilter);
     document.addEventListener('keydown', onEscPress);
     uploadFormCancel.addEventListener('keydown', onEnterPress);
-    uploadFormHashtags.addEventListener('input', validationForm.looksHashtags);
-    uploadFormHashtags.addEventListener('invalid', validationForm.addRedFrame);
-    uploadFormDescription.addEventListener('invalid', validationForm.addRedFrame);
-    uploadFormDescription.addEventListener('input', validationForm.looksFormDescription);
+    uploadFormHashtags.addEventListener('input', window.validationForm.looksHashtags);
+    uploadFormHashtags.addEventListener('invalid', window.validationForm.addRedFrame);
+    uploadFormDescription.addEventListener('invalid', window.validationForm.addRedFrame);
+    uploadFormDescription.addEventListener('input', window.validationForm.looksFormDescription);
   }
 
   function closeOverlay() {
@@ -49,34 +49,34 @@
     uploadEffect.removeEventListener('click', setPhotoFilter);
     document.removeEventListener('keydown', onEscPress);
     uploadFormCancel.removeEventListener('keydown', onEnterPress);
-    uploadFormHashtags.removeEventListener('input', validationForm.looksHashtags);
-    uploadFormHashtags.removeEventListener('invalid', validationForm.addRedFrame);
-    uploadFormDescription.removeEventListener('invalid', validationForm.addRedFrame);
-    uploadFormDescription.removeEventListener('input', validationForm.looksFormDescription);
+    uploadFormHashtags.removeEventListener('input', window.validationForm.looksHashtags);
+    uploadFormHashtags.removeEventListener('invalid', window.validationForm.addRedFrame);
+    uploadFormDescription.removeEventListener('invalid', window.validationForm.addRedFrame);
+    uploadFormDescription.removeEventListener('input', window.validationForm.looksFormDescription);
   }
 
   function openPopup(evt) {
     var target = evt.target.parentNode;
-    preview.printFotoInGallery(target);
-    galleryOverlay.classList.remove('hidden');
+    window.preview.printFotoInGallery(target);
+    window.galleryOverlay.classList.remove('hidden');
     galleryOverlayClose.addEventListener('click', closePopup);
     document.addEventListener('keydown', onEscPress);
-    similarListElement.removeEventListener('click', openPopup);
-    similarListElement.removeEventListener('keydown', onEnterPress);
+    window.similarListElement.removeEventListener('click', openPopup);
+    window.similarListElement.removeEventListener('keydown', onEnterPress);
     galleryOverlayClose.addEventListener('keydown', onEnterPress);
   }
 
   function closePopup() {
-    galleryOverlay.classList.add('hidden');
+    window.galleryOverlay.classList.add('hidden');
     galleryOverlayClose.removeEventListener('click', closePopup);
     document.removeEventListener('keydown', onEscPress);
-    similarListElement.addEventListener('click', openPopup);
-    similarListElement.addEventListener('keydown', onEnterPress);
+    window.similarListElement.addEventListener('click', openPopup);
+    window.similarListElement.addEventListener('keydown', onEnterPress);
     galleryOverlayClose.removeEventListener('keydown', onEnterPress);
   }
 
   function onEnterPress(evt) {
-    if (evt.keyCode === ENTER_KEYCODE && evt.currentTarget === similarListElement) {
+    if (evt.keyCode === ENTER_KEYCODE && evt.currentTarget === window.similarListElement) {
       openPopup();
     }
     if (evt.keyCode === ENTER_KEYCODE && evt.target === galleryOverlayClose) {
