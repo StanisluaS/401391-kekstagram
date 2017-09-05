@@ -9,7 +9,7 @@
   var SLIDER = 91;
   var effectImage = window.uploadOverlay.querySelector('.effect-image-preview');
 
-  window.initializeFilters(setPhotoFilter, moveSlider);
+  window.initializeFilters.makeFilters(setPhotoFilter, moveSlider);
   window.initializeScale.makeScale(getResizeInc, getResizeDec);
 
   // волидация поля коментариев
