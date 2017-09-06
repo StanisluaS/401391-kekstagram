@@ -6,12 +6,12 @@
   var ENTER_KEYCODE = 13;
   var ESC_KEYCODE = 27;
 
+  window.uploadOverlay = document.querySelector('.upload-overlay');
   var galleryOverlayClose = window.galleryOverlay.querySelector('.gallery-overlay-close');
   window.uploadSelectImage = document.querySelector('#upload-select-image');
   var uploadImage = window.uploadSelectImage.querySelector('.upload-image');
   var uploadFile = window.uploadSelectImage.querySelector('#upload-file');
   var uploadFormCancel = window.uploadOverlay.querySelector('.upload-form-cancel');
-  var uploadEffect = window.uploadOverlay.querySelector('.upload-effect-controls');
   var uploadFormHashtags = window.uploadOverlay.querySelector('.upload-form-hashtags');
   var uploadFormDescription = window.uploadOverlay.querySelector('.upload-form-description');
   var effectLevel = window.uploadOverlay.querySelector('.upload-effect-level');
@@ -27,33 +27,22 @@
     effectLevel.classList.add('hidden');
     uploadFile.removeEventListener('change', openOverlay);
     uploadFormCancel.addEventListener('click', closeOverlay);
-    window.buttonDec.addEventListener('click', window.validationForm.getResize);
-    window.buttonInc.addEventListener('click', window.validationForm.getResize);
-    uploadEffect.addEventListener('click', window.validationForm.setPhotoFilter);
-    window.effectPin.addEventListener('mousedown', window.validationForm.onClickPin);
     document.addEventListener('keydown', onEscPress);
     uploadFormCancel.addEventListener('keydown', onEnterPress);
-    uploadFormHashtags.addEventListener('input', window.validationForm.looksHashtags);
-    uploadFormHashtags.addEventListener('invalid', window.validationForm.addRedFrame);
-    uploadFormDescription.addEventListener('invalid', window.validationForm.addRedFrame);
-    uploadFormDescription.addEventListener('input', window.validationForm.looksFormDescription);
+    uploadFormHashtags.addEventListener('blur', window.validationForm.looksHashtags);
+    uploadFormDescription.addEventListener('blur', window.validationForm.looksFormDescription);
   }
 
   function closeOverlay() {
+    uploadFormHashtags.style.borderColor = '';
     window.uploadOverlay.classList.add('hidden');
     uploadImage.classList.remove('hidden');
     uploadFile.addEventListener('change', openOverlay);
     uploadFormCancel.removeEventListener('click', closeOverlay);
-    window.buttonDec.removeEventListener('click', window.validationForm.getResize);
-    window.buttonInc.removeEventListener('click', window.validationForm.getResize);
-    uploadEffect.removeEventListener('click', window.validationForm.setPhotoFilter);
-    window.effectPin.removeEventListener('mousedown', window.validationForm.onClickPin);
     document.removeEventListener('keydown', onEscPress);
     uploadFormCancel.removeEventListener('keydown', onEnterPress);
-    uploadFormHashtags.removeEventListener('input', window.validationForm.looksHashtags);
-    uploadFormHashtags.removeEventListener('invalid', window.validationForm.addRedFrame);
-    uploadFormDescription.removeEventListener('invalid', window.validationForm.addRedFrame);
-    uploadFormDescription.removeEventListener('input', window.validationForm.looksFormDescription);
+    uploadFormHashtags.removeEventListener('blur', window.validationForm.looksHashtags);
+    uploadFormDescription.removeEventListener('blur', window.validationForm.looksFormDescription);
   }
 
   function openPopup(evt) {
