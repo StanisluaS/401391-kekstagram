@@ -31,6 +31,7 @@
   }
 
   function closeOverlay() {
+    window.errorMssage.classList.add('hidden');
     uploadFormHashtags.style.borderColor = '';
     window.uploadOverlay.classList.add('hidden');
     window.uploadImage.classList.remove('hidden');

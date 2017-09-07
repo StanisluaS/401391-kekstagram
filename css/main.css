@@ -28,6 +28,18 @@ body {
   display: none;
 }
 
+/*Сообщение о ошибке*/
+.error-message {
+  margin: 0 auto;
+  position: absolute;
+  right: 0px;
+  left: 0px;
+  z-index: 100;
+  font-size: 30px;
+  text-align: center;
+  background-color: red;
+}
+
 /* Фильтры */
 
 .filters {

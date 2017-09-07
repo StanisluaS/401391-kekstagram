@@ -8,19 +8,13 @@
   window.uploadOverlay = document.querySelector('.upload-overlay');
   window.uploadImage = window.uploadSelectImage.querySelector('.upload-image');
   var similarFotoTemplate = document.querySelector('#picture-template').content;
+  window.errorMssage = document.querySelector('.error-message');
 
   window.backend.load(printFoto, errorHandler);
 
   function errorHandler(errorMessage) {
-    var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
+    window.errorMssage.textContent = errorMessage;
+    window.errorMssage.classList.remove('hidden');
   }
 
   window.uploadSelectImage.addEventListener('submit', function (evt) {
