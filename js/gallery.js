@@ -6,10 +6,7 @@
   var ENTER_KEYCODE = 13;
   var ESC_KEYCODE = 27;
 
-  window.uploadOverlay = document.querySelector('.upload-overlay');
   var galleryOverlayClose = window.galleryOverlay.querySelector('.gallery-overlay-close');
-  window.uploadSelectImage = document.querySelector('#upload-select-image');
-  var uploadImage = window.uploadSelectImage.querySelector('.upload-image');
   var uploadFile = window.uploadSelectImage.querySelector('#upload-file');
   var uploadFormCancel = window.uploadOverlay.querySelector('.upload-form-cancel');
   var uploadFormHashtags = window.uploadOverlay.querySelector('.upload-form-hashtags');
@@ -23,7 +20,7 @@
 
   function openOverlay() {
     window.uploadOverlay.classList.remove('hidden');
-    uploadImage.classList.add('hidden');
+    window.uploadImage.classList.add('hidden');
     effectLevel.classList.add('hidden');
     uploadFile.removeEventListener('change', openOverlay);
     uploadFormCancel.addEventListener('click', closeOverlay);
@@ -34,9 +31,10 @@
   }
 
   function closeOverlay() {
+    window.errorMssage.classList.add('hidden');
     uploadFormHashtags.style.borderColor = '';
     window.uploadOverlay.classList.add('hidden');
-    uploadImage.classList.remove('hidden');
+    window.uploadImage.classList.remove('hidden');
     uploadFile.addEventListener('change', openOverlay);
     uploadFormCancel.removeEventListener('click', closeOverlay);
     document.removeEventListener('keydown', onEscPress);
