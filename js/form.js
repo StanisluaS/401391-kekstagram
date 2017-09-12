@@ -7,7 +7,6 @@
   var MAX_HASHTAGS = 5;
   var WIDTH = 455;
   var SLIDER = 91;
-  var effectImage = window.uploadOverlay.querySelector('.effect-image-preview');
 
   window.initializeFilters.makeFilters(setPhotoFilter, moveSlider);
   window.initializeScale.makeScale(getResizeInc, getResizeDec);
@@ -74,27 +73,27 @@
   function moveSlider(typeClass, index) {
     if (typeClass === 'effect-none') {
       window.effectLevel.classList.add('hidden');
-      effectImage.style.filter = '';
+      window.effectImage.style.filter = '';
     }
 
     if (typeClass === 'effect-chrome') {
-      effectImage.style.filter = 'grayscale(' + index + ')';
+      window.effectImage.style.filter = 'grayscale(' + index + ')';
     }
 
     if (typeClass === 'effect-sepia') {
-      effectImage.style.filter = 'sepia(' + index + ')';
+      window.effectImage.style.filter = 'sepia(' + index + ')';
     }
 
     if (typeClass === 'effect-marvin') {
-      effectImage.style.filter = 'invert(' + (100 * index) + '%)';
+      window.effectImage.style.filter = 'invert(' + (100 * index) + '%)';
     }
 
     if (typeClass === 'effect-phobos') {
-      effectImage.style.filter = 'blur(' + (5 * index) + 'px)';
+      window.effectImage.style.filter = 'blur(' + (5 * index) + 'px)';
     }
 
     if (typeClass === 'effect-heat') {
-      effectImage.style.filter = 'brightness(' + (3 * index) + ')';
+      window.effectImage.style.filter = 'brightness(' + (3 * index) + ')';
     }
   }
 
