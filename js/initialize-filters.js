@@ -22,21 +22,21 @@
         var classEffect = classImage.replace('effect-image-preview ', '');
 
         var startCoords = {
-          x: evt.clientX,
+          x: evt.clientX
         };
         var shift = {
-          x: 0,
+          x: 0
         };
 
         function onMouseMove(moveEvt) {
           moveEvt.preventDefault();
 
           shift = {
-            x: startCoords.x - moveEvt.clientX,
+            x: startCoords.x - moveEvt.clientX
           };
 
           startCoords = {
-            x: moveEvt.clientX,
+            x: moveEvt.clientX
           };
 
           slider -= shift.x;
