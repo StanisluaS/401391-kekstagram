@@ -13,7 +13,6 @@
   var uploadFormDescription = window.uploadOverlay.querySelector('.upload-form-description');
   var effectLevel = window.uploadOverlay.querySelector('.upload-effect-level');
 
-
   window.similarListElement.addEventListener('click', openPopup);
   window.similarListElement.addEventListener('keydown', onEnterPress);
   uploadFile.addEventListener('change', openOverlay);

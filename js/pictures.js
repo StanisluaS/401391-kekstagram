@@ -9,8 +9,10 @@
   window.uploadImage = window.uploadSelectImage.querySelector('.upload-image');
   var similarFotoTemplate = document.querySelector('#picture-template').content;
   window.errorMssage = document.querySelector('.error-message');
+  var filters = document.querySelector('.filters');
+  var data = [];
 
-  window.backend.load(printFoto, errorHandler);
+  window.backend.load(getArrayFotos, errorHandler);
 
   function errorHandler(errorMessage) {
     window.errorMssage.textContent = errorMessage;
@@ -41,4 +43,47 @@
     window.similarListElement.appendChild(fragment);
   }
 
+  function removeFoto() {
+    var fotosElement = document.querySelectorAll('.picture');
+    for (var i = 0; i < fotosElement.length; i++) {
+      window.similarListElement.removeChild(fotosElement[i]);
+    }
+  }
+
+  function getArrayFotos(loadData) {
+    data = loadData;
+    printFoto(data);
+    filters.classList.remove('hidden');
+    filters.addEventListener('change', onFilterClick);
+  }
+
+  function onFilterClick(evt) {
+    evt.preventDefault();
+    switch (evt.target.value) {
+      case 'recommend':
+        window.debounce(function () {
+          removeFoto();
+          printFoto(data);
+        });
+        break;
+      case 'popular':
+        window.debounce(function () {
+          removeFoto();
+          printFoto(window.method.getPopularFoto(data));
+        });
+        break;
+      case 'discussed':
+        window.debounce(function () {
+          removeFoto();
+          printFoto(window.method.getDiscussFoto(data));
+        });
+        break;
+      case 'random':
+        window.debounce(function () {
+          removeFoto();
+          printFoto(window.method.getRandomFoto(data));
+        });
+        break;
+    }
+  }
 })();
