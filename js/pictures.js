@@ -54,31 +54,30 @@
     data = loadData;
     printFoto(data);
     filters.classList.remove('hidden');
-    filters.addEventListener('change', onFilterClick);
+    filters.addEventListener('click', onFilterClick);
   }
 
   function onFilterClick(evt) {
-    evt.preventDefault();
-    switch (evt.target.value) {
-      case 'recommend':
+    switch (evt.target.id) {
+      case 'filter-recommend':
         window.debounce(function () {
           removeFoto();
           printFoto(data);
         });
         break;
-      case 'popular':
+      case 'filter-popular':
         window.debounce(function () {
           removeFoto();
           printFoto(window.method.getPopularFoto(data));
         });
         break;
-      case 'discussed':
+      case 'filter-discussed':
         window.debounce(function () {
           removeFoto();
           printFoto(window.method.getDiscussFoto(data));
         });
         break;
-      case 'random':
+      case 'filter-random':
         window.debounce(function () {
           removeFoto();
           printFoto(window.method.getRandomFoto(data));
