@@ -60,25 +60,25 @@
   function onFilterClick(evt) {
     switch (evt.target.id) {
       case 'filter-recommend':
-        window.debounce(function () {
+        window.debounce.removeDebounce(function () {
           removeFoto();
           printFoto(data);
         });
         break;
       case 'filter-popular':
-        window.debounce(function () {
+        window.debounce.removeDebounce(function () {
           removeFoto();
           printFoto(window.method.getPopularFoto(data));
         });
         break;
       case 'filter-discussed':
-        window.debounce(function () {
+        window.debounce.removeDebounce(function () {
           removeFoto();
           printFoto(window.method.getDiscussFoto(data));
         });
         break;
       case 'filter-random':
-        window.debounce(function () {
+        window.debounce.removeDebounce(function () {
           removeFoto();
           printFoto(window.method.getRandomFoto(data));
         });
