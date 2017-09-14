@@ -14,7 +14,7 @@
       if (xhr.status === 200) {
         onLoad(xhr.response);
       } else {
-        onError('Произошла ошибка, код: ' + xhr.status);
+        onError('Произошла ошибка, код: ' + xhr.status + ' ' + xhr.statusText);
       }
     });
     xhr.addEventListener('error', function () {

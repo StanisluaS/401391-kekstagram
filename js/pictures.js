@@ -21,14 +21,6 @@
 
   window.backend.load(getArrayFotos, window.pictures.errorHandler);
 
-  window.uploadSelectImage.addEventListener('submit', function (evt) {
-    evt.preventDefault();
-    window.backend.save(new FormData(window.uploadSelectImage), function () {
-      window.uploadOverlay.classList.add('hidden');
-      window.uploadImage.classList.remove('hidden');
-    }, window.pictures.errorHandler);
-  });
-
   function getFotos(picturesData) {
     var fotoElement = similarFotoTemplate.cloneNode(true);
     fotoElement.querySelector('img').setAttribute('src', picturesData.url);
