@@ -12,19 +12,21 @@
   var filters = document.querySelector('.filters');
   var data = [];
 
-  window.backend.load(getArrayFotos, errorHandler);
+  window.pictures = {
+    errorHandler: function (errorMessage) {
+      window.errorMssage.textContent = errorMessage;
+      window.errorMssage.classList.remove('hidden');
+    }
+  };
 
-  function errorHandler(errorMessage) {
-    window.errorMssage.textContent = errorMessage;
-    window.errorMssage.classList.remove('hidden');
-  }
+  window.backend.load(getArrayFotos, window.pictures.errorHandler);
 
   window.uploadSelectImage.addEventListener('submit', function (evt) {
     evt.preventDefault();
     window.backend.save(new FormData(window.uploadSelectImage), function () {
       window.uploadOverlay.classList.add('hidden');
       window.uploadImage.classList.remove('hidden');
-    }, errorHandler);
+    }, window.pictures.errorHandler);
   });
 
   function getFotos(picturesData) {

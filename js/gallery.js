@@ -18,6 +18,10 @@
   window.similarListElement.addEventListener('click', openPopup);
   window.similarListElement.addEventListener('keydown', onEnterPress);
   uploadFile.addEventListener('change', openOverlay);
+  window.uploadSelectImage.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.backend.save(new FormData(window.uploadSelectImage), closeOverlay, window.pictures.errorHandler);
+  });
 
   function openOverlay() {
     uploadFormCancel.addEventListener('click', removeEffect);

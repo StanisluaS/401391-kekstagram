@@ -112,18 +112,27 @@
           arrayHastags[j] = array[i];
           if (arrayHastags[j].length > maxLength) {
             element.target.setCustomValidity('Максимальная длина одного хэш-тега ' + maxLength + ' символов');
+            return;
           } else if (arrayHastags[j].substring(0, 1) !== '#') {
             element.target.style.borderColor = 'red';
             element.target.setCustomValidity('Хэш-тег начинается с символа `#` и должен включать одно слово');
+            return;
           } else if (arrayHastags[j].indexOf('#', 1) !== -1) {
             element.target.style.borderColor = 'red';
             element.target.setCustomValidity('Хэш-теги разделяются пробелами');
-          } else if ((value.match(new RegExp(arrayHastags[j], 'g'))).length > 1) {
+            return;
+          } else if (array.indexOf(arrayHastags[j], (i + 1)) !== -1) {
             element.target.style.borderColor = 'red';
             element.target.setCustomValidity('Хэш-теги не должны повторяться');
+            return;
           } else if ((j + 1) > maxHashtags) {
             element.target.style.borderColor = 'red';
             element.target.setCustomValidity('Максимум можно использовать ' + maxHashtags + ' хеш-тегов');
+            return;
+          } else if (arrayHastags[j] === '#') {
+            element.target.style.borderColor = 'red';
+            element.target.setCustomValidity('Хэш-тег не должен быть пустым');
+            return;
           } else {
             element.target.setCustomValidity('');
             element.target.style.borderColor = '';
