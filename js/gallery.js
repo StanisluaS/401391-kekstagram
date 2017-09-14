@@ -18,13 +18,8 @@
   window.similarListElement.addEventListener('click', openPopup);
   window.similarListElement.addEventListener('keydown', onEnterPress);
   uploadFile.addEventListener('change', openOverlay);
-  window.uploadSelectImage.addEventListener('submit', function (evt) {
-    evt.preventDefault();
-    window.backend.save(new FormData(window.uploadSelectImage), closeOverlay, window.pictures.errorHandler);
-  });
 
   function openOverlay() {
-    uploadFormCancel.addEventListener('click', removeEffect);
     window.uploadOverlay.classList.remove('hidden');
     window.uploadImage.classList.add('hidden');
     effectLevel.classList.add('hidden');
@@ -34,12 +29,12 @@
     uploadFormCancel.addEventListener('keydown', onEnterPress);
     uploadFormHashtags.addEventListener('blur', window.validationForm.looksHashtags);
     uploadFormDescription.addEventListener('blur', window.validationForm.looksFormDescription);
+    window.uploadSelectImage.addEventListener('submit', submitForm);
   }
 
   function closeOverlay() {
+    removeEffect();
     window.errorMssage.classList.add('hidden');
-    uploadFormHashtags.style.borderColor = '';
-    uploadFormCancel.removeEventListener('click', removeEffect);
     window.uploadOverlay.classList.add('hidden');
     window.uploadImage.classList.remove('hidden');
     uploadFile.addEventListener('change', openOverlay);
@@ -48,6 +43,7 @@
     uploadFormCancel.removeEventListener('keydown', onEnterPress);
     uploadFormHashtags.removeEventListener('blur', window.validationForm.looksHashtags);
     uploadFormDescription.removeEventListener('blur', window.validationForm.looksFormDescription);
+    window.uploadSelectImage.removeEventListener('submit', submitForm);
   }
 
   function openPopup(evt) {
@@ -91,11 +87,21 @@
     }
   }
 
+  function submitForm(evt) {
+    evt.preventDefault();
+    window.backend.save(new FormData(window.uploadSelectImage), function () {
+      closeOverlay();
+      window.uploadSelectImage.reset();
+    }
+    , window.pictures.errorHandler);
+  }
+
   function removeEffect() {
     window.effectImage.style.filter = '';
     window.uploadSelectImage.querySelector('img').setAttribute('class', 'effect-image-preview');
     window.uploadOverlay.querySelector('img').style.transform = '';
     window.resizeValue.setAttribute('value', '100%');
+    uploadFormHashtags.style.borderColor = '';
   }
 
 })();
