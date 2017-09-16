@@ -11,7 +11,7 @@
   window.initializeFilters.makeFilters(setPhotoFilter, moveSlider);
   window.initializeScale.makeScale(getResizeInc, getResizeDec);
 
-  // волидация поля коментариев
+  // валидация поля комментариев
   window.validationForm = {
     looksFormDescription: function (evt) {
       var value = evt.target.value.trim();
@@ -23,7 +23,7 @@
     },
 
 
-// волидация поля хештегов
+// валидация поля хэштегов
     looksHashtags: function (evt) {
       var str = evt.target.value;
       makeArrayHashtags(evt, str, MAX_HASHTAGS, MAX_LENGTH_HASHTAGS);
@@ -45,7 +45,7 @@
     }
   }
 
-    // изминение маштаба на табло
+    // изменение масштаба на табло
   function getResizeInc(resizeValue) {
     var value = parseInt(resizeValue.getAttribute('value'), 10);
     if (value < 100) {
@@ -64,12 +64,12 @@
     resizeImage(newValue);
   }
 
-    // маштаб картинки
+    // масштаб картинки
   function resizeImage(valueImg) {
     window.uploadOverlay.querySelector('img').style.transform = 'scale(' + valueImg / 100 + ')';
   }
 
-// Изминение фильтов
+// Изменение фильтров
   function moveSlider(typeClass, index) {
     if (typeClass === 'effect-none') {
       window.effectLevel.classList.add('hidden');
@@ -98,8 +98,9 @@
   }
 
 
-// Доп функция для хештегов
+// Доп функция для хэштегов
   function makeArrayHashtags(element, value, maxHashtags, maxLength) {
+    var regex = new RegExp(/([^$A-Za-z0-9А-Яа-я_# ]+)/);
     if (value.trim() === '' && value !== '') {
       element.target.setCustomValidity('Хэш-тег не должен быть пустым');
       element.target.style.borderColor = 'red';
@@ -132,6 +133,10 @@
           } else if (arrayHastags[j] === '#') {
             element.target.style.borderColor = 'red';
             element.target.setCustomValidity('Хэш-тег не должен быть пустым');
+            return;
+          } else if (regex.test(arrayHastags[j])) {
+            element.target.style.borderColor = 'red';
+            element.target.setCustomValidity('Хэш-тег должен содержать только буквы или цифры');
             return;
           } else {
             element.target.setCustomValidity('');

@@ -34,7 +34,7 @@
 
   function closeOverlay() {
     removeEffect();
-    window.errorMssage.classList.add('hidden');
+    window.errorMessage.classList.add('hidden');
     window.uploadOverlay.classList.add('hidden');
     window.uploadImage.classList.remove('hidden');
     uploadFile.addEventListener('change', openOverlay);
@@ -47,14 +47,24 @@
   }
 
   function openPopup(evt) {
-    var target = evt.target.parentNode;
-    window.preview.printFotoInGallery(target);
-    window.galleryOverlay.classList.remove('hidden');
-    galleryOverlayClose.addEventListener('click', closePopup);
-    document.addEventListener('keydown', onEscPress);
-    window.similarListElement.removeEventListener('click', openPopup);
-    window.similarListElement.removeEventListener('keydown', onEnterPress);
-    galleryOverlayClose.addEventListener('keydown', onEnterPress);
+    var target = evt.target;
+    if (target.classList.contains('pictures')) {
+      return;
+    } else {
+      while (target.parentNode !== evt.currentTarget) {
+        target = target.parentNode;
+        if (target.classList.contains('picture')) {
+          window.preview.printFotoInGallery(target);
+          window.galleryOverlay.classList.remove('hidden');
+          galleryOverlayClose.addEventListener('click', closePopup);
+          document.addEventListener('keydown', onEscPress);
+          window.similarListElement.removeEventListener('click', openPopup);
+          window.similarListElement.removeEventListener('keydown', onEnterPress);
+          galleryOverlayClose.addEventListener('keydown', onEnterPress);
+          return;
+        }
+      }
+    }
   }
 
   function closePopup() {

@@ -8,14 +8,14 @@
   window.uploadOverlay = document.querySelector('.upload-overlay');
   window.uploadImage = window.uploadSelectImage.querySelector('.upload-image');
   var similarFotoTemplate = document.querySelector('#picture-template').content;
-  window.errorMssage = document.querySelector('.error-message');
+  window.errorMessage = document.querySelector('.error-message');
   var filters = document.querySelector('.filters');
   var data = [];
 
   window.pictures = {
     errorHandler: function (errorMessage) {
-      window.errorMssage.textContent = errorMessage;
-      window.errorMssage.classList.remove('hidden');
+      window.errorMessage.textContent = errorMessage;
+      window.errorMessage.classList.remove('hidden');
     }
   };
 
@@ -52,31 +52,29 @@
   }
 
   function onFilterClick(evt) {
-    switch (evt.target.id) {
-      case 'filter-recommend':
-        window.debounce.removeDebounce(function () {
-          removeFoto();
-          printFoto(data);
-        });
-        break;
-      case 'filter-popular':
-        window.debounce.removeDebounce(function () {
-          removeFoto();
-          printFoto(window.method.getPopularFoto(data));
-        });
-        break;
-      case 'filter-discussed':
-        window.debounce.removeDebounce(function () {
-          removeFoto();
-          printFoto(window.method.getDiscussFoto(data));
-        });
-        break;
-      case 'filter-random':
-        window.debounce.removeDebounce(function () {
-          removeFoto();
-          printFoto(window.method.getRandomFoto(data));
-        });
-        break;
+    var target = evt.target;
+    if (target === evt.currentTarget) {
+      return;
+    } else {
+      var element;
+      switch (evt.target.id) {
+        case 'filter-recommend':
+          element = data;
+          break;
+        case 'filter-popular':
+          element = window.method.getPopularFoto(data);
+          break;
+        case 'filter-discussed':
+          element = window.method.getDiscussFoto(data);
+          break;
+        case 'filter-random':
+          element = window.method.getRandomFoto(data);
+          break;
+      }
+      window.debounce.debounce(function () {
+        removeFoto();
+        printFoto(element);
+      });
     }
   }
 })();
