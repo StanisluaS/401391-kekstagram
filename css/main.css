@@ -726,8 +726,12 @@ input[type=radio]:checked + .upload-effect-label .upload-effect-preview {
 .gallery-overlay-preview {
   display: inline-block;
   margin: 30px 0;
-
   background: #ffffff;
+}
+
+.gallery-overlay-window {
+  position: relative;
+    height: 600px;
 }
 
 .gallery-overlay-image[src=""] {
@@ -737,6 +741,46 @@ input[type=radio]:checked + .upload-effect-label .upload-effect-preview {
 
   border: dotted 1px #dddddd;
   cursor: pointer;
+}
+
+.gallery-overlay-pages {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.pages-prev {
+  left: -34px
+}
+
+.pages-next{
+  right: -34px;
+}
+
+.gallery-overlay-pages span {
+  position: absolute;
+  width: 22px;
+  height: 69px;
+  top: 50%;
+  background-image: url(../img/sprite.png);
+  background-repeat: no-repeat;
+  /* -webkit-background-size: 266px; */
+  background-size: 266px;
+}
+
+.pages-prev span {
+background-position: -6px -88px;
+left: 0;
+}
+
+.pages-next span {
+background-position: -237px -88px;
+right: 0;
 }
 
 .gallery-overlay-controls {

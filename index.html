@@ -140,12 +140,20 @@
 <div class="gallery-overlay hidden">
   <span class="gallery-overlay-close" tabindex="0">&times;</span>
   <div class="gallery-overlay-preview">
+    <div class="gallery-overlay-window">
     <img src="" class="gallery-overlay-image" alt="">
+    <a title="Previous" class="gallery-overlay-pages pages-prev" href="#">
+      <span></span>
+    </a>
+    <a title="Next" class="gallery-overlay-pages pages-next" href="#">
+      <span></span>
+    </a>
+  </div>
     <div class="gallery-overlay-controls">
       <div class="gallery-overlay-controls-like">Нравится <span class="likes-count">0</span></div>
-      <div class="gallery-overlay-controls-comments"><span class="comments-count">125</span> комментариев</div>
+      <div class="gallery-overlay-controls-comments"><span class="comments-count">0</span> комментариев</div>
     </div>
-  </div>
+      </div>
 </div>
 
 <template id="picture-template" style="display: none">
@@ -160,8 +168,8 @@
 <script src="./js/debounce.js"></script>
 <script src="./js/backend.js"></script>
 <script src="./js/method.js"></script>
-<script src="./js/pictures.js"></script>
 <script src="./js/preview.js"></script>
+<script src="./js/pictures.js"></script>
 <script src="./js/gallery.js"></script>
 <script src="./js/initialize-scale.js"></script>
 <script src="./js/initialize-filters.js"></script>
