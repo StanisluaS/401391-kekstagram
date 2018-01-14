@@ -12,6 +12,7 @@
   var uploadFormHashtags = window.uploadOverlay.querySelector('.upload-form-hashtags');
   var uploadFormDescription = window.uploadOverlay.querySelector('.upload-form-description');
   var effectLevel = window.uploadOverlay.querySelector('.upload-effect-level');
+  var galleryPages = document.querySelector('.gallery-overlay-pages');
   window.effectImage = window.uploadOverlay.querySelector('.effect-image-preview');
   window.resizeValue = window.uploadOverlay.querySelector('.upload-resize-controls-value');
 
@@ -66,6 +67,8 @@
   function openPopupWindow(el) {
     window.preview.printFotoInGallery(el);
     window.galleryOverlay.classList.remove('hidden');
+    window.pagesNext.addEventListener('click', window.pictures.leafImge);
+    window.pagesPrev.addEventListener('click', window.pictures.leafImge);
     galleryOverlayClose.addEventListener('click', closePopup);
     document.addEventListener('keydown', onEscPress);
     window.similarListElement.removeEventListener('click', openPopup);
@@ -76,6 +79,8 @@
 
   function closePopup() {
     window.galleryOverlay.classList.add('hidden');
+    window.index = 0;
+    window.flag = true;
     galleryOverlayClose.removeEventListener('click', closePopup);
     document.removeEventListener('keydown', onEscPress);
     window.similarListElement.addEventListener('click', openPopup);

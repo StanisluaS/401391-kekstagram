@@ -10,12 +10,21 @@
   var similarFotoTemplate = document.querySelector('#picture-template').content;
   window.errorMessage = document.querySelector('.error-message');
   var filters = document.querySelector('.filters');
+  window.pagesNext = document.querySelector('.pages-next');
+  window.pagesPrev = document.querySelector('.pages-prev');
   var data = [];
+  var imgElement;
+  window.flag = true;
+  window.index = 0;
 
   window.pictures = {
     errorHandler: function (errorMessage) {
       window.errorMessage.textContent = errorMessage;
       window.errorMessage.classList.remove('hidden');
+    },
+
+    leafImge: function (evt) {
+      window.preview.printFotoInGallerys(makeElement(evt));
     }
   };
 
@@ -76,5 +85,39 @@
         printFoto(element);
       });
     }
+  }
+
+  function makeArray(elements) {
+    var array = [];
+    for (var i = 0; i < 25; i++) {
+      array[i] = elements[i];
+    }
+    return array;
+  }
+
+  function makeElement(evt) {
+    var array = makeArray(data);
+    var target = evt.target;
+    var targetImg = window.galleryOverlay.querySelector('img').getAttribute('src');
+    if (window.flag) {
+      for (var i = 0; i < 25; i++) {
+        var img = array[i].url;
+        window.index = i;
+        if (img === targetImg) {
+          break;
+        }
+      }
+    }
+    if (target === window.pagesNext) {
+      imgElement = array[window.index + 1];
+      window.flag = false;
+      window.index += 1;
+    }
+    if (target === window.pagesPrev) {
+      imgElement = array[window.index - 1];
+      window.flag = false;
+      window.index -= 1;
+    }
+    return imgElement;
   }
 })();
