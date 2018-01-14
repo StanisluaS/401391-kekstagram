@@ -12,6 +12,8 @@
   var filters = document.querySelector('.filters');
   window.pagesNext = document.querySelector('.pages-next');
   window.pagesPrev = document.querySelector('.pages-prev');
+  var spanPagesNext = window.pagesNext.querySelector('span');
+  var spanPagesPrev = window.pagesPrev.querySelector('span');
   var data = [];
   var imgElement;
   window.flag = true;
@@ -108,12 +110,12 @@
         }
       }
     }
-    if (target === window.pagesNext) {
+    if (target === window.pagesNext || target === spanPagesNext) {
       imgElement = array[window.index + 1];
       window.flag = false;
       window.index += 1;
     }
-    if (target === window.pagesPrev) {
+    if (target === window.pagesPrev || target === spanPagesPrev) {
       imgElement = array[window.index - 1];
       window.flag = false;
       window.index -= 1;

@@ -12,7 +12,6 @@
   var uploadFormHashtags = window.uploadOverlay.querySelector('.upload-form-hashtags');
   var uploadFormDescription = window.uploadOverlay.querySelector('.upload-form-description');
   var effectLevel = window.uploadOverlay.querySelector('.upload-effect-level');
-  var galleryPages = document.querySelector('.gallery-overlay-pages');
   window.effectImage = window.uploadOverlay.querySelector('.effect-image-preview');
   window.resizeValue = window.uploadOverlay.querySelector('.upload-resize-controls-value');
 
