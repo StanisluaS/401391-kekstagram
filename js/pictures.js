@@ -15,9 +15,10 @@
   var spanPagesNext = window.pagesNext.querySelector('span');
   var spanPagesPrev = window.pagesPrev.querySelector('span');
   var data = [];
+  var array = [];
   var imgElement;
-  window.flag = true;
-  window.index = 0;
+  var flag = true;
+  var index = 0;
 
   window.pictures = {
     errorHandler: function (errorMessage) {
@@ -26,7 +27,12 @@
     },
 
     leafImge: function (evt) {
-      window.preview.printFotoInGallerys(makeElement(evt));
+      window.preview.printFotoInGallery(makeElement(evt));
+    },
+
+    setZero: function () {
+      flag = true;
+      index = 0;
     }
   };
 
@@ -44,6 +50,7 @@
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < 25; i++) {
       fragment.appendChild(getFotos(picturesData[i]));
+      array[i] = picturesData[i];
     }
     window.similarListElement.appendChild(fragment);
   }
@@ -64,10 +71,10 @@
 
   function onFilterClick(evt) {
     var target = evt.target;
+    var element;
     if (target === evt.currentTarget) {
       return;
     } else {
-      var element;
       switch (evt.target.id) {
         case 'filter-recommend':
           element = data;
@@ -89,36 +96,33 @@
     }
   }
 
-  function makeArray(elements) {
-    var array = [];
-    for (var i = 0; i < 25; i++) {
-      array[i] = elements[i];
-    }
-    return array;
-  }
-
   function makeElement(evt) {
-    var array = makeArray(data);
     var target = evt.target;
     var targetImg = window.galleryOverlay.querySelector('img').getAttribute('src');
-    if (window.flag) {
+    if (flag) {
       for (var i = 0; i < 25; i++) {
         var img = array[i].url;
-        window.index = i;
+        index = i;
         if (img === targetImg) {
           break;
         }
       }
     }
-    if (target === window.pagesNext || target === spanPagesNext) {
-      imgElement = array[window.index + 1];
-      window.flag = false;
-      window.index += 1;
+    if (index < 25 && (target === window.pagesNext || target === spanPagesNext)) {
+      if (index === 24) {
+        index = -1;
+      }
+      imgElement = array[index + 1];
+      flag = false;
+      index += 1;
     }
-    if (target === window.pagesPrev || target === spanPagesPrev) {
-      imgElement = array[window.index - 1];
-      window.flag = false;
-      window.index -= 1;
+    if (index >= 0 && (target === window.pagesPrev || target === spanPagesPrev)) {
+      if (index === 0) {
+        index = 25;
+      }
+      imgElement = array[index - 1];
+      flag = false;
+      index -= 1;
     }
     return imgElement;
   }

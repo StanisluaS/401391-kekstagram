@@ -78,8 +78,11 @@
 
   function closePopup() {
     window.galleryOverlay.classList.add('hidden');
-    window.index = 0;
-    window.flag = true;
+    // window.index = 0;
+    // window.flag = true;
+    window.pictures.setZero();
+    window.pagesNext.removeEventListener('click', window.pictures.leafImge);
+    window.pagesPrev.removeEventListener('click', window.pictures.leafImge);
     galleryOverlayClose.removeEventListener('click', closePopup);
     document.removeEventListener('keydown', onEscPress);
     window.similarListElement.addEventListener('click', openPopup);
@@ -93,6 +96,7 @@
     }
     if (evt.keyCode === ENTER_KEYCODE && evt.target === galleryOverlayClose) {
       closePopup();
+      window.pictures.setZero();
     }
     if (evt.keyCode === ENTER_KEYCODE && evt.target === uploadFormCancel) {
       closeOverlay();
@@ -105,6 +109,7 @@
       closePopup();
       closeOverlay();
       removeEffect();
+      window.pictures.setZero();
     }
   }
 
