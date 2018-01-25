@@ -731,7 +731,7 @@ input[type=radio]:checked + .upload-effect-label .upload-effect-preview {
 
 .gallery-overlay-window {
   position: relative;
-    height: 600px;
+    /* height: 600px; */
 }
 
 .gallery-overlay-image[src=""] {
