@@ -3,7 +3,7 @@
 
 (function () {
 
-  var SERVER_URL = 'https://1510.dump.academy/kekstagram';
+  var SERVER_URL = 'https://js.dump.academy/kekstagram';
 
   function setup(onLoad, onError, timeout) {
     var xhr = new XMLHttpRequest();
