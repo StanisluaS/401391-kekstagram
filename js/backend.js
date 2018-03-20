@@ -5,6 +5,7 @@
 
   var SERVER_URL = 'https://js.dump.academy/kekstagram';
 
+
   function setup(onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
