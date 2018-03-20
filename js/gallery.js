@@ -48,41 +48,27 @@
 
   function openPopup(evt) {
     var target = evt.target;
-    if (target === evt.currentTarget) {
+    if (target.classList.contains('pictures')) {
       return;
-    }
-    if (target.classList.contains('picture')) {
-      openPopupWindow(target);
     } else {
       while (target.parentNode !== evt.currentTarget) {
         target = target.parentNode;
         if (target.classList.contains('picture')) {
-          openPopupWindow(target);
+          window.preview.printFotoInGallery(target);
+          window.galleryOverlay.classList.remove('hidden');
+          galleryOverlayClose.addEventListener('click', closePopup);
+          document.addEventListener('keydown', onEscPress);
+          window.similarListElement.removeEventListener('click', openPopup);
+          window.similarListElement.removeEventListener('keydown', onEnterPress);
+          galleryOverlayClose.addEventListener('keydown', onEnterPress);
+          return;
         }
       }
     }
   }
 
-  function openPopupWindow(el) {
-    window.preview.printFotoInGallery(el);
-    window.galleryOverlay.classList.remove('hidden');
-    window.pagesNext.addEventListener('click', window.pictures.leafImge);
-    window.pagesPrev.addEventListener('click', window.pictures.leafImge);
-    galleryOverlayClose.addEventListener('click', closePopup);
-    document.addEventListener('keydown', onEscPress);
-    window.similarListElement.removeEventListener('click', openPopup);
-    window.similarListElement.removeEventListener('keydown', onEnterPress);
-    galleryOverlayClose.addEventListener('keydown', onEnterPress);
-    return;
-  }
-
   function closePopup() {
     window.galleryOverlay.classList.add('hidden');
-    // window.index = 0;
-    // window.flag = true;
-    window.pictures.setZero();
-    window.pagesNext.removeEventListener('click', window.pictures.leafImge);
-    window.pagesPrev.removeEventListener('click', window.pictures.leafImge);
     galleryOverlayClose.removeEventListener('click', closePopup);
     document.removeEventListener('keydown', onEscPress);
     window.similarListElement.addEventListener('click', openPopup);
@@ -92,11 +78,10 @@
 
   function onEnterPress(evt) {
     if (evt.keyCode === ENTER_KEYCODE && evt.currentTarget === window.similarListElement) {
-      openPopup(evt);
+      openPopup();
     }
     if (evt.keyCode === ENTER_KEYCODE && evt.target === galleryOverlayClose) {
       closePopup();
-      window.pictures.setZero();
     }
     if (evt.keyCode === ENTER_KEYCODE && evt.target === uploadFormCancel) {
       closeOverlay();
@@ -109,7 +94,6 @@
       closePopup();
       closeOverlay();
       removeEffect();
-      window.pictures.setZero();
     }
   }
 
