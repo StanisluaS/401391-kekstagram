@@ -22,7 +22,6 @@
       }
     },
 
-
 // валидация поля хэштегов
     looksHashtags: function (evt) {
       var str = evt.target.value;

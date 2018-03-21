@@ -2,7 +2,6 @@
 'use strict';
 
 (function () {
-
   window.uploadSelectImage = document.querySelector('#upload-select-image');
   window.similarListElement = document.querySelector('.pictures');
   window.uploadOverlay = document.querySelector('.upload-overlay');

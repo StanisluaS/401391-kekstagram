@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var buttonDec = window.uploadOverlay.querySelector('.upload-resize-controls-button-dec');
   var buttonInc = window.uploadOverlay.querySelector('.upload-resize-controls-button-inc');
 

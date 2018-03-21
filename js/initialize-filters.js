@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-
   window.effectLevel = window.uploadOverlay.querySelector('.upload-effect-level');
   window.effectPin = window.effectLevel.querySelector('.upload-effect-level-pin');
   var uploadEffect = window.uploadOverlay.querySelector('.upload-effect-controls');
