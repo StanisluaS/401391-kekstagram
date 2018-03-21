@@ -2,7 +2,6 @@
 'use strict';
 
 (function () {
-
   window.galleryOverlay = document.querySelector('.gallery-overlay');
 
   window.preview = {
