@@ -6,23 +6,24 @@
   var ESC_KEYCODE = 27;
 
   var galleryOverlayClose = window.galleryOverlay.querySelector('.gallery-overlay-close');
-  var uploadFile = window.uploadSelectImage.querySelector('#upload-file');
   var uploadFormCancel = window.uploadOverlay.querySelector('.upload-form-cancel');
   var uploadFormHashtags = window.uploadOverlay.querySelector('.upload-form-hashtags');
   var uploadFormDescription = window.uploadOverlay.querySelector('.upload-form-description');
   var effectLevel = window.uploadOverlay.querySelector('.upload-effect-level');
+  var uploadControl = window.uploadImage.querySelector('.upload-control');
+  var uploadFile = document.querySelector('#upload-file');
   window.effectImage = window.uploadOverlay.querySelector('.effect-image-preview');
   window.resizeValue = window.uploadOverlay.querySelector('.upload-resize-controls-value');
 
   window.similarListElement.addEventListener('click', openPopup);
   window.similarListElement.addEventListener('keydown', onEnterPress);
-  uploadFile.addEventListener('change', openOverlay);
+  window.upload.addEventsImage(uploadFile, uploadControl, openOverlay, window.pictures.errorHandler);
 
   function openOverlay() {
     window.uploadOverlay.classList.remove('hidden');
     window.uploadImage.classList.add('hidden');
     effectLevel.classList.add('hidden');
-    uploadFile.removeEventListener('change', openOverlay);
+    window.upload.removeEventsImage(uploadFile, uploadControl, openOverlay, window.pictures.errorHandler);
     uploadFormCancel.addEventListener('click', closeOverlay);
     document.addEventListener('keydown', onEscPress);
     uploadFormCancel.addEventListener('keydown', onEnterPress);
@@ -36,7 +37,7 @@
     window.errorMessage.classList.add('hidden');
     window.uploadOverlay.classList.add('hidden');
     window.uploadImage.classList.remove('hidden');
-    uploadFile.addEventListener('change', openOverlay);
+    window.upload.addEventsImage(uploadFile, uploadControl, openOverlay, window.pictures.errorHandler);
     uploadFormCancel.removeEventListener('click', closeOverlay);
     document.removeEventListener('keydown', onEscPress);
     uploadFormCancel.removeEventListener('keydown', onEnterPress);
@@ -107,6 +108,7 @@
 
   function removeEffect() {
     window.effectImage.style.filter = '';
+    window.effectImage.setAttribute('src', 'img/upload-default-image.jpg');
     window.uploadSelectImage.querySelector('img').setAttribute('class', 'effect-image-preview');
     window.uploadOverlay.querySelector('img').style.transform = '';
     window.resizeValue.setAttribute('value', '100%');

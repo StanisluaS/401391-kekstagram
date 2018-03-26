@@ -2,6 +2,9 @@
 'use strict';
 
 (function () {
+
+  var TIME_OUTPUT = 3000; // мс время показа сообщения ошибки
+
   window.uploadSelectImage = document.querySelector('#upload-select-image');
   window.similarListElement = document.querySelector('.pictures');
   window.uploadOverlay = document.querySelector('.upload-overlay');
@@ -15,6 +18,10 @@
     errorHandler: function (errorMessage) {
       window.errorMessage.textContent = errorMessage;
       window.errorMessage.classList.remove('hidden');
+      setTimeout(function () {
+        window.errorMessage.classList.add('hidden');
+        window.errorMessage.textContent = '';
+      }, TIME_OUTPUT);
     }
   };
 
