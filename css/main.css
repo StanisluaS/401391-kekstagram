@@ -170,6 +170,13 @@ body {
   background: url("../img/icon-photo.png") center no-repeat;
   border: none;
   cursor: pointer;
+
+  transition-duration: 2s;
+  transition-property: transform;
+}
+
+.upload-control-transform {
+  transform: scale(1.3);
 }
 
 .upload-image .upload-submit {
@@ -296,7 +303,19 @@ body {
   text-align: center;
 }
 
+.upload-form-preview {
+  margin: 0 auto;
+  width: 586px;
+}
+
+/* @media (max-width: 586px) {
+  .upload-form-preview {
+  width: auto;
+  }
+} */
+
 .effect-image-preview {
+  width: 100%;
   vertical-align: middle;
 }
 
