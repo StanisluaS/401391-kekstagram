@@ -17,13 +17,13 @@
 
   window.similarListElement.addEventListener('click', openPopup);
   window.similarListElement.addEventListener('keydown', onEnterPress);
-  window.upload.addEventsImage(uploadFile, uploadControl, openOverlay, window.pictures.errorHandler);
+  window.upload.addEventsImage(uploadFile, uploadControl, openOverlay, window.util.errorHandler);
 
   function openOverlay() {
     window.uploadOverlay.classList.remove('hidden');
     window.uploadImage.classList.add('hidden');
     effectLevel.classList.add('hidden');
-    window.upload.removeEventsImage(uploadFile, uploadControl, openOverlay, window.pictures.errorHandler);
+    window.upload.removeEventsImage(uploadFile, uploadControl, openOverlay, window.util.errorHandler);
     uploadFormCancel.addEventListener('click', closeOverlay);
     document.addEventListener('keydown', onEscPress);
     uploadFormCancel.addEventListener('keydown', onEnterPress);
@@ -37,7 +37,7 @@
     window.errorMessage.classList.add('hidden');
     window.uploadOverlay.classList.add('hidden');
     window.uploadImage.classList.remove('hidden');
-    window.upload.addEventsImage(uploadFile, uploadControl, openOverlay, window.pictures.errorHandler);
+    window.upload.addEventsImage(uploadFile, uploadControl, openOverlay, window.util.errorHandler);
     uploadFormCancel.removeEventListener('click', closeOverlay);
     document.removeEventListener('keydown', onEscPress);
     uploadFormCancel.removeEventListener('keydown', onEnterPress);
